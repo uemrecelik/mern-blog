@@ -19,13 +19,13 @@ mongoose.connect(MONGO_URL,() =>{console.log("db connected")})
 
 
 app.get('/',(req,res) =>{res.send("Serrver Runnon")})
-app.get('/add',(req,res) =>{
+app.post('/add',async (req,res) =>{
     const post = new Post({
-        title,
-        content,
-        imgURL,
+        title: req.body.title,
+        content: req.body.content,
+        imgURL: req.body.imgURL
     })
-    post.save().then((result) => {
+     await post.save().then((result) => {
         res.send(result)
     })
         .catch((err) => {
